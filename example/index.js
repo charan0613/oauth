@@ -1,25 +1,25 @@
 'use strict';
 
 const express = require('express');
-const simpleOauthModule = require('./../');
+const simpleOauthModule = require('./lib/client/auth-code');
 
 const app = express();
 const oauth2 = simpleOauthModule.create({
   client: {
-    id: '<CLIENT_ID>',
-    secret: '<CLIENT_SECRET>',
+    id: 'A0O4KMUD',
+    secret: 'Efk2TemkODNl6q3LmY4yUNj5Iu416yRpUmVKrjS',
   },
   auth: {
-    tokenHost: 'https://github.com',
-    tokenPath: '/login/oauth/access_token',
-    authorizePath: '/login/oauth/authorize',
+    tokenHost: 'https://idp.mycloud.com',
+    tokenPath: '/as/token.oauth2',
+    authorizePath: '/as/authorization.oauth2',
   },
 });
 
 // Authorization uri definition
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
   redirect_uri: 'http://localhost:3000/callback',
-  scope: 'notifications',
+  scope: 'read-write',
   state: '3(#0/!~',
 });
 
@@ -56,7 +56,7 @@ app.get('/success', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello<br><a href="/auth">Log in with Github</a>');
+  res.send('Hello<br><a href="/auth">Log in with MyCloud</a>');
 });
 
 app.listen(3000, () => {
