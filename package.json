@@ -16,7 +16,7 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "start": "node example/index.js",
+    "start": "node main.js",
     "pretest": "npm run lint",
     "test": "mocha ",
     "lint": "eslint .",
